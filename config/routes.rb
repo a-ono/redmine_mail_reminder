@@ -1,5 +1,5 @@
-  resources :mail_reminders do
-    post 'update_interval_values', :on => :collection
+RedmineApp::Application.routes.draw do
+  scope "projects/:project_id", as: 'project' do
+    resources :mail_reminders
   end
-
-  resources :query
+end

@@ -1,0 +1,5 @@
+$("#reminder-<%= @reminder.id %>").hide().after(
+  $('<tr id="reminder-<%= @reminder.id %>-edit"/>').append($('<td class="description" colspan="4"/>').append(
+    "<%= escape_javascript render(partial: 'form', locals: {reminder: @reminder}) %>"
+  ))
+);

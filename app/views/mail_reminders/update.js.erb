@@ -1,0 +1,2 @@
+$("#reminder-<%= @reminder.id %>-edit").remove();
+$("#reminder-<%= @reminder.id %>").replaceWith("<%= escape_javascript render(partial: "reminder", object: @reminder) %>");

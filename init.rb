@@ -22,14 +22,13 @@ Redmine::Plugin.register :redmine_mail_reminder do
   description 'Issue reminder plugin for Redmine, based on Ascendro S.R.L version https://github.com/ascendro/redmine_issue_reminder '
   version '3.0.0.0001'
   url 'https://github.com/Hopebaytech/redmine_mail_reminder'
-
-  permission :view_issue_reminder, :mail_reminders => :index
+  requires_redmine :version_or_higher => '3.0.0'
 
   settings( :default => { 'email_subject' => :default_email_subject},
             :partial => 'reminder_settings/issue_reminder_settings')
   
   project_module :issue_reminder do
-    permission :view_issue_reminder, :mail_reminders => :index
+    permission :view_issue_reminder, :mail_reminders => [:index, :edit, :create, :update, :destroy]
   end
    
   if_proc = Proc.new{|project| project.enabled_module_names.include?('issue_reminder')}

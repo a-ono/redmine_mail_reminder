@@ -14,6 +14,10 @@ class MailReminder < ActiveRecord::Base
 
   validates_presence_of :query_id
   
+  def self.roles_for(project)
+    project.members.includes(:roles).flat_map(&:roles).uniq
+  end
+
   def self.intervals
     [:daily, :weekly, :monthly]
   end
@@ -36,6 +40,7 @@ class MailReminder < ActiveRecord::Base
   end
 
   def self.interval_values_for(interval)
+    interval ||= :daily
     case interval.to_s.downcase
     when("daily")
       daily_intervals.enum_for(:each_with_index).collect {|val,idx| [interval_value_display("daily", val), idx]}
@@ -61,6 +66,10 @@ class MailReminder < ActiveRecord::Base
     else
       "Unknown"
     end
+  end
+
+  def interval_value_options
+    self.class.interval_values_for(interval)
   end
 
   def execute?
@@ -104,5 +113,5 @@ class MailReminder < ActiveRecord::Base
     end
   end
 
-  attr_accessible :project_id, :query_id, :interval
+  attr_accessible :query_id, :interval, :interval_value, :role_ids
 end
