@@ -1,6 +1,6 @@
 <%= form_for([@project, reminder], :as => :reminder, :remote => true) do |f| %>
   <p>
-    <%= f.label l(:query) %>
+    <%= f.label l(:label_query) %>
     <%= f.select :query_id, queries_for_options(@project.id) %>
     <%= link_to l(:label_query_new), new_query_path, :class => 'icon icon-add' %>
   </p>
@@ -13,12 +13,12 @@
     <%= f.select :interval_value, reminder.interval_value_options %>
   </p>
     <p>
-      <%= f.label l(:roles) %>:<br />
+      <%= f.label l(:label_role_plural) %>:<br />
       <% MailReminder.roles_for(@project).each do |role| %>
         <label><%= check_box_tag('reminder[role_ids][]', role.id, reminder.roles.include?(role), id: nil) %> <%= role.name %></label><br />
       <% end %>
     </p>
-    <%= f.submit reminder.new_record? ? l(:add) : l(:save) %>
+    <%= f.submit reminder.new_record? ? l(:button_add) : l(:button_save) %>
 
     <% unless reminder.new_record? %>
       <%= link_to l(:button_cancel), "#", onclick: "$('#reminder-#{reminder.id}-edit').remove(); $('#reminder-#{reminder.id}').show(); return false;" %>

@@ -32,7 +32,7 @@ class MailReminder < ActiveRecord::Base
   end
 
   def self.weekly_intervals
-    Date::DAYNAMES
+    I18n.t("date.day_names")
   end
 
   def self.monthly_intervals
@@ -59,8 +59,8 @@ class MailReminder < ActiveRecord::Base
       value = MailReminder.daily_intervals[value] if value.is_a? Integer
       l(value)
     when("weekly")
-      value = Date::DAYNAMES[value] if value.is_a? Integer
-      l(:every_weekly_format) % l(value.downcase.to_sym)
+      value = weekly_intervals[value] if value.is_a? Integer
+      l(:every_weekly_format) % value
     when("monthly")
       l(:every_of_month_format) % value
     else
