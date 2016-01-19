@@ -2,7 +2,7 @@
   <p>
     <%= f.label l(:label_query) %>
     <%= f.select :query_id, queries_for_options(@project.id) %>
-    <%= link_to l(:label_query_new), new_query_path, :class => 'icon icon-add' %>
+    <%= link_to l(:label_query_new), new_project_query_path(@project), :class => 'icon icon-add' %>
   </p>
   <p>
     <%= f.label l(:interval) %>:
