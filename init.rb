@@ -1,16 +1,4 @@
 require 'redmine'
-require 'active_support/core_ext'
-
-# This plugin should be reloaded in development mode.
-if Rails.env == 'development'
-  ActiveSupport::Dependencies.autoload_once_paths.reject!{|x| x =~ /^#{Regexp.escape(File.dirname(__FILE__))}/}
-end
-
-# Tentative de faire fonctionner le plugin sous Rails 3
-ActionDispatch::Callbacks.to_prepare do
-    # use require_dependency if you plan to utilize development mode
-    require 'boards_watchers_patches'
-end
 
 ActionMailer::Base.default :skip_premailer => true
 
