@@ -5,15 +5,7 @@ class MailRemindersController < ApplicationController
   before_filter :authorize
 
   def index
-    needs_refresh = false
     @reminders = MailReminder.where(project_id: @project)
-    @reminders.each do |reminder|
-      if reminder.query.nil?
-        reminder.destroy
-        needs_refresh = true
-      end
-    end
-    @reminders = MailReminder.where(project_id: @project) if needs_refresh
     @reminder = MailReminder.new
   end
 

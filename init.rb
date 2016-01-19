@@ -1,4 +1,9 @@
 require 'redmine'
+require 'redmine_mail_reminder'
+
+Rails.application.config.to_prepare do
+  RedmineMailReminder.apply_patch
+end
 
 ActionMailer::Base.default :skip_premailer => true
 
