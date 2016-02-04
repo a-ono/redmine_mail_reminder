@@ -31,7 +31,7 @@ module MailRemindersHelper
         h(value.to_s)
       end
     when 'User'
-      link_to "#{value.firstname} #{value.lastname}", user_url(value)
+      link_to value.name, user_url(value)
     when 'Project'
       link_to value.name, project_url(value)
     when 'Version'
